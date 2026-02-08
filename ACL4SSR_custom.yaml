@@ -45,6 +45,9 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - 🤖 AI节点
+      - 🤖 Gemini
+      - 🤖 ChatGPT
+      - 🤖 X
       - 🚀 手动切换
       - DIRECT
   - name: 📹 油管视频
@@ -261,6 +264,24 @@ proxy-groups:
   - name: 🤖 AI节点
     include-all: true
     filter: (?i)GPT|GM|X
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🤖 Gemini
+    include-all: true
+    filter: (?i)GM
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🤖 ChatGPT
+    include-all: true
+    filter: (?i)GPT
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🤖 X
+    include-all: true
+    filter: (?i)X
     type: url-test
     interval: 300
     tolerance: 50
