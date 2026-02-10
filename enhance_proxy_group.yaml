@@ -1,0 +1,563 @@
+# 代理组
+proxy-groups:
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png
+    include-all: false
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    name: PROXY
+    type: select
+    proxies:
+      - AUTO
+      - HK AUTO
+      - JP AUTO
+      - TW AUTO
+      - SG AUTO
+      - US AUTO
+      - AI
+      - TikTok
+      - Youtube
+      - Gemini
+      - Twitter优选
+      - 手动选择
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/TikTok.png
+    include-all: false
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    name: TikTok
+    type: select
+    proxies:
+      - TIKTOK-VN
+      - TIKTOK-US
+      - TIKTOK-JP
+      - TIKTOK-SG
+      - TIKTOK-TW
+      # - 手动选择|TT
+      # - TIKTOK-KR
+      # - TIKTOK-GB
+      # - TIKTOK-CA
+      # - TIKTOK-DE
+      # - TIKTOK-NL
+      # - TIKTOK-RU
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Available.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    name: 手动选择
+    type: select
+    proxies:
+      - AUTO
+  # - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+  #   include-all: true
+  #   exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+  #   filter: (?i)^(?=.*T(?:K))
+  #   name: 手动选择|TT
+  #   type: select
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Urltest.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|⁻|频道|订阅|ISP|流量|到期|重置
+    name: AUTO
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://cp.cloudflare.com/generate_204
+    lazy: false
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Google.png
+    name: Google
+    type: select
+    proxies:
+      - PROXY
+      - Youtube
+      - AUTO
+      - HK AUTO
+      - JP AUTO
+      - US AUTO
+      - TW AUTO
+      - SG AUTO
+  - icon: https://cdn.jsdelivr.net/gh/sinspired/proxy-rules@main/ico/AI.png
+    name: AI
+    type: select
+    proxies:
+      - OpenAI
+      - Gemini
+      - AUTO
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Twitter.png
+    name: Twitter
+    type: select
+    proxies:
+      - Twitter优选
+      - OpenAI
+      - Gemini
+      - PROXY
+      - AUTO
+      - HK AUTO
+      - JP AUTO
+      - US AUTO
+      - TW AUTO
+      - SG AUTO
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Bing.png
+    name: Bing
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+      - AI
+      - AUTO
+  - icon: https://cdn.jsdelivr.net/gh/sinspired/proxy-rules@main/ico/Spotify.png
+    name: Spotify
+    type: select
+    proxies:
+      - US AUTO
+      - HK AUTO
+      - JP AUTO
+      - TW AUTO
+      - SG AUTO
+      - PROXY
+      - DIRECT
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png
+    name: Telegram
+    type: select
+    proxies:
+      - HK AUTO
+      - JP AUTO
+      - US AUTO
+      - TW AUTO
+      - SG AUTO
+      - AUTO
+      - PROXY
+
+  # 关键词筛选
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/OpenAI.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)(?=.*\bOpenai\b|openai|chatgpt|gpt|GPT)
+    name: OpenAI
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://cp.cloudflare.com/generate_204
+    lazy: false
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/sinspired/proxy-rules@main/ico/Gemini.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)(?=.*\bGemini\b|gemini|GEMINI|\bGM\b)
+    name: Gemini
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: false
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/YouTube.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)(?=.*\bYoutube\b|youtube|YT|YouTube|流媒体)
+    name: Youtube
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: false
+    max-failed-times: 3
+    expected-status: 204
+
+  - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Twitter.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|⁻|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)(?=.*\bX\b|twitter)
+    name: Twitter优选
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://cp.cloudflare.com/generate_204
+    lazy: false
+    max-failed-times: 3
+    expected-status: 204
+
+  # TikTok地区筛选
+  - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)^(?=.*TK|tiktok)(?=.*(?:(?:^|[^-])US|TK-US))
+    name: TIKTOK-US
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)^(?=.*TK|tiktok)(?=.*(?:(?:^|[^-])JP|TK-JP))
+    name: TIKTOK-JP
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)^(?=.*TK|tiktok)(?=.*(?:(?:^|[^-])VN|TK-VN))
+    name: TIKTOK-VN
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)^(?=.*TK|tiktok)(?=.*(?:(?:^|[^-])SG|TK-SG))
+    name: TIKTOK-SG
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+    include-all: true
+    exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?i)^(?=.*TK|tiktok)(?=.*(?:(?:^|[^-])TW|TK-TW))
+    name: TIKTOK-TW
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  # - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+  #   include-all: true
+  #   exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+  #   filter: (?i)^(?=.*TK|tiktok)(?=.*(?:(?:^|[^-])KR|TK-KR))
+  #   name: TIKTOK-KR
+  #   type: url-test
+  #   interval: 600
+  #   tolerance: 100
+  # - icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png
+  #   include-all: true
+  #   exclude-filter: (?i)Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+  #   filter: (?i)^(?=.*TK|tiktok)(?=.*(?:(?:^|[^-])GB|TK-GB))
+  #   name: TIKTOK-GB
+  #   type: url-test
+  #   interval: 600
+  #   tolerance: 100
+
+  # 地区筛选
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?<!-)\b(?:HK(?!⁻)|香港|港|Hong\s?Kong)\b
+    name: HK AUTO
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?<!-)\b(?:TW(?!⁻)|台湾|台|tai)\b
+    name: TW AUTO
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?<!-)\b(?:SG(?!⁻)|新加坡|新|sin)\b
+    name: SG AUTO
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?<!-)\b(?:JP(?!⁻)|日本|日|JAPAN)\b
+    name: JP AUTO
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?<!-)\b(?:US(?!⁻)|美国|美|American)\b
+    name: US AUTO
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+  - icon: https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    filter: (?<!-)\b(?:KR(?!⁻)|韩国|韩|首尔)\b
+    name: KR AUTO
+    type: url-test
+    interval: 600
+    tolerance: 100
+    url: https://www.gstatic.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    expected-status: 204
+
+# 代理规则
+rules:
+  # 域名/URL 规则优先
+  - "RULE-SET,lan,DIRECT"
+  - "RULE-SET,private,DIRECT"
+  - "RULE-SET,unBanAD,DIRECT"
+  - "RULE-SET,ban_ad,REJECT"
+  - "RULE-SET,ban_program_ad,REJECT"
+  - "RULE-SET,tiktok,TikTok"
+  - "RULE-SET,tiktok_external,TikTok"
+  - "RULE-SET,youtube,Youtube"
+  - "RULE-SET,gemini,Gemini"
+  - "RULE-SET,openai,OpenAI"
+  - "RULE-SET,claude,AI"
+  - "RULE-SET,bing,Bing"
+  - "RULE-SET,copilot,AI"
+  - "RULE-SET,cloudflare-cn,DIRECT"
+  - "RULE-SET,cloudflare,OpenAI"
+  - "RULE-SET,twitter,Twitter"
+  - "RULE-SET,steam,PROXY"
+  - "RULE-SET,spotify,Spotify"
+  - "RULE-SET,OneDrive,PROXY"
+  - "RULE-SET,telegram_domain,Telegram"
+  - "RULE-SET,google_domain,Google"
+  - "RULE-SET,geolocation-!cn,PROXY"
+  - "RULE-SET,cn_domain,DIRECT"
+  - "RULE-SET,NetEaseMusic,DIRECT"
+  - "RULE-SET,Download,DIRECT"
+  # IP 规则
+  - "RULE-SET,telegram_ip,Telegram"
+  - "RULE-SET,google_ip,Google"
+  - "RULE-SET,cn_ip,DIRECT"
+  - "GEOIP,CN,DIRECT"
+  # 最终兜底
+  - "MATCH,PROXY"
+
+rule-providers:
+  private:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
+    path: ./ruleset/private.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  unBanAD:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml
+    path: ./ruleset/direct.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  ban_ad:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Advertising/Advertising.yaml
+    path: ./ruleset/ban_ad.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  ban_program_ad:
+    url: https://cdn.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/BanProgramAD.list
+    path: ./ruleset/ban_program_ad.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+
+  lan:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml
+    path: ./ruleset/lan.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  tiktok:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/classical/tiktok.yaml
+    path: ./ruleset/tiktok.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  tiktok_external:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml
+    path: ./ruleset/tiktok_external.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  spotify:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml
+    path: ./ruleset/spotify.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  cn_domain:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml
+    path: ./ruleset/cn_domain.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  telegram_domain:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.yaml
+    path: ./ruleset/telegram_domain.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  google_domain:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.yaml
+    path: ./ruleset/google_domain.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  geolocation-!cn:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml
+    path: ./ruleset/geolocation-!cn.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  cn_ip:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.yaml
+    path: ./ruleset/cn_ip.yaml
+    behavior: ipcidr
+    interval: 86400
+    format: yaml
+    type: http
+  telegram_ip:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.yaml
+    path: ./ruleset/telegram_ip.yaml
+    behavior: ipcidr
+    interval: 86400
+    format: yaml
+    type: http
+  google_ip:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.yaml
+    path: ./ruleset/google_ip.yaml
+    behavior: ipcidr
+    interval: 86400
+    format: yaml
+    type: http
+  bing:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml
+    path: ./ruleset/bing.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  copilot:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml
+    path: ./ruleset/copilot.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  claude:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml
+    path: ./ruleset/claude.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  openai:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml
+    path: ./ruleset/openai.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  gemini:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gemini/Gemini.yaml
+    path: ./ruleset/gemini.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  youtube:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml
+    path: ./ruleset/youtube.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  twitter:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml
+    path: ./ruleset/twitter.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  steam:
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml
+    path: ./ruleset/steam.yaml
+    behavior: classical
+    interval: 86400
+    format: yaml
+    type: http
+  OneDrive:
+    url: https://cdn.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/OneDrive.list
+    path: ./ruleset/OneDrive.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  NetEaseMusic:
+    url: https://cdn.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Ruleset/NetEaseMusic.list
+    path: ./ruleset/NetEaseMusic.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Download:
+    url: https://cdn.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Download.list
+    path: ./ruleset/Download.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  cloudflare:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare.yaml
+    path: ./ruleset/cloudflare.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
+  cloudflare-cn:
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare-cn.yaml
+    path: ./ruleset/cloudflare-cn.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+    type: http
