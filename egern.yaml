@@ -1,591 +1,206 @@
-# Egern Profile
-# 从 Clash enhance_proxy_group.yaml 转换
-# ⚠️  请将所有 YOUR_SUBSCRIPTION_URL 替换为你的实际订阅链接
-
 policy_groups:
-  # ========== 全量订阅基础组（external 类型，拉取所有节点）==========
-  - external:
-      name: "全部节点"
-      type: select
-      urls:
-        - "YOUR_SUBSCRIPTION_URL"
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*$"
-      update_interval: 86400
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Available.png"
-
-  # ========== 全局自动测速 ==========
-  - auto_test:
-      name: AUTO
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|⁻|频道|订阅|ISP|流量|到期|重置)).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Urltest.png"
-
-  # ========== 手动选择 ==========
+  # ── 业务分流组 ──────────────────────────────
   - select:
-      name: 手动选择
+      name: 推特
       policies:
-        - AUTO
-        - 全部节点
+        - 所有地区
       flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*$"
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Available.png"
-
-  # ========== 地区自动测速组 ==========
-  - auto_test:
-      name: HK AUTO
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:HK|香港|港|Hong Kong).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png"
-
-  - auto_test:
-      name: JP AUTO
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:JP|日本|日|JAPAN).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png"
-
-  - auto_test:
-      name: TW AUTO
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:TW|台湾|台|tai).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png"
-
-  - auto_test:
-      name: SG AUTO
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:SG|新加坡|新|sin).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png"
-
-  - auto_test:
-      name: US AUTO
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:US|美国|美|American).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png"
-
-  - auto_test:
-      name: KR AUTO
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:KR|韩国|韩|首尔).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png"
-
-  - auto_test:
-      name: Asia AUTO
-      policies:
-        - HK AUTO
-        - JP AUTO
-        - TW AUTO
-        - SG AUTO
-        - KR AUTO
-      interval: 600
-      tolerance: 100
-      icon: "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png"
-
-  # ========== 关键词筛选自动测速组 ==========
-  - auto_test:
-      name: OpenAI
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:openai|chatgpt|gpt).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/OpenAI.png"
-
-  - auto_test:
-      name: Gemini
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:gemini|\bGM\b).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/sinspired/proxy-rules@main/ico/Gemini.png"
-
-  - auto_test:
-      name: Youtube
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:youtube|YT|流媒体).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/YouTube.png"
-
-  - auto_test:
-      name: Twitter优选
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|⁻|频道|订阅|ISP|流量|到期|重置)).*(?:\bX\b|twitter).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Twitter.png"
-
-  # ========== TikTok 地区筛选组 ==========
-  - auto_test:
-      name: TIKTOK-US
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:TK|tiktok).*(?:US|TK-US).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png"
-
-  - auto_test:
-      name: TIKTOK-JP
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:TK|tiktok).*(?:JP|TK-JP).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png"
-
-  - auto_test:
-      name: TIKTOK-VN
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:TK|tiktok).*(?:VN|TK-VN).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png"
-
-  - auto_test:
-      name: TIKTOK-SG
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:TK|tiktok).*(?:SG|TK-SG).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png"
-
-  - auto_test:
-      name: TIKTOK-TW
-      policies:
-        - 全部节点
-      flatten: true
-      filter: "(?i)^(?!.*(Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置)).*(?:TK|tiktok).*(?:TW|TK-TW).*$"
-      interval: 600
-      tolerance: 100
-      icon: "https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png"
-
-  # ========== TikTok 入口 ==========
-  - select:
-      name: TikTok
-      policies:
-        - TIKTOK-VN
-        - TIKTOK-US
-        - TIKTOK-JP
-        - TIKTOK-SG
-        - TIKTOK-TW
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TikTok.png"
-
-  # ========== AI 聚合 ==========
-  - select:
-      name: AI
-      policies:
-        - OpenAI
-        - Gemini
-        - AUTO
-      icon: "https://testingcf.jsdelivr.net/gh/sinspired/proxy-rules@main/ico/AI.png"
-
-  # ========== 顶层策略组 ==========
-  - select:
-      name: PROXY
-      policies:
-        - AUTO
-        - Asia AUTO
-        - HK AUTO
-        - JP AUTO
-        - TW AUTO
-        - SG AUTO
-        - US AUTO
-        - AI
-        - TikTok
-        - Youtube
-        - Gemini
-        - Twitter优选
-        - 手动选择
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png"
-
-  - select:
-      name: Google
-      policies:
-        - PROXY
-        - Youtube
-        - AUTO
-        - HK AUTO
-        - JP AUTO
-        - US AUTO
-        - TW AUTO
-        - SG AUTO
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Google.png"
-
-  - select:
-      name: Twitter
-      policies:
-        - Twitter优选
-        - OpenAI
-        - Gemini
-        - PROXY
-        - AUTO
-        - HK AUTO
-        - JP AUTO
-        - US AUTO
-        - TW AUTO
-        - SG AUTO
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Twitter.png"
-
-  - select:
-      name: Bing
-      policies:
-        - DIRECT
-        - PROXY
-        - AI
-        - AUTO
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Bing.png"
+      icon: https://avatars.githubusercontent.com/u/50278?s=200&v=4
 
   - select:
       name: Spotify
       policies:
-        - US AUTO
-        - HK AUTO
-        - JP AUTO
-        - TW AUTO
-        - SG AUTO
-        - PROXY
-        - DIRECT
-      icon: "https://testingcf.jsdelivr.net/gh/sinspired/proxy-rules@main/ico/Spotify.png"
+        - 所有地区
+      flatten: true
+      icon: https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png
+
+  - select:
+      name: Apple
+      policies:
+        - 直连
+        - 所有地区
+      flatten: true
+      icon: https://avatars.githubusercontent.com/u/10639145?s=200&v=4
+
+  - select:
+      name: Google
+      policies:
+        - 所有地区
+      flatten: true
+      icon: https://avatars.githubusercontent.com/u/1342004?s=200&v=4
+
+  - select:
+      name: Youtube
+      policies:
+        - 所有地区
+      flatten: true
+      icon: https://www.youtube.com/s/desktop/7197d3dc/img/favicon_144x144.png
+
+  - select:
+      name: AI
+      policies:
+        - 所有地区
+      flatten: true
+      icon: https://avatars.githubusercontent.com/u/14957082?s=200&v=4
 
   - select:
       name: Telegram
       policies:
-        - HK AUTO
-        - JP AUTO
-        - US AUTO
-        - TW AUTO
-        - SG AUTO
-        - AUTO
-        - PROXY
-      icon: "https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png"
+        - 所有地区
+      flatten: true
+      icon: https://telegram.org/img/apple-touch-icon.png
 
-# ---- 规则集 ----
-rule_sets:
-  - name: private
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml"
-    update_interval: 86400
+  # ── 地区节点组（fallback 自动故障转移）────────
+  - fallback:
+      name: 美国
+      policies:
+        - 所有代理
+      flatten: true
+      filter: (🇺🇸)|(美)|(States)|(US)
+      icon: 🇺🇸
 
-  - name: unBanAD
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml"
-    update_interval: 86400
+  - fallback:
+      name: 日本
+      policies:
+        - 所有代理
+      flatten: true
+      filter: (🇯🇵)|(日本)|(Japan)|(JP)
+      icon: 🇯🇵
 
-  - name: ban_ad
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Advertising/Advertising.yaml"
-    update_interval: 86400
+  - fallback:
+      name: 新加坡
+      policies:
+        - 所有代理
+      flatten: true
+      filter: (🇸🇬)|(新加坡)|(Singapore)|(SG)
+      icon: 🇸🇬
 
-  - name: ban_program_ad
-    type: http
-    format: text
-    url: "https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/BanProgramAD.list"
-    update_interval: 86400
+  - fallback:
+      name: 香港
+      policies:
+        - 所有代理
+      flatten: true
+      filter: (🇭🇰)|(香港)|(Hong Kong)|(HK)
+      icon: 🇭🇰
 
-  - name: lan
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml"
-    update_interval: 86400
+  - fallback:
+      name: 台湾
+      policies:
+        - 所有代理
+      flatten: true
+      filter: (🇹🇼)|(台湾)|(Taiwan)|(TW)
+      icon: 🇹🇼
 
-  - name: tiktok
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/classical/tiktok.yaml"
-    update_interval: 86400
+  - fallback:
+      name: 其他国家
+      policies:
+        - 所有代理
+      flatten: true
+      filter: ^(?!.*(🇺🇸|美|States|US|🇯🇵|日本|Japan|JP|🇸🇬|新加坡|Singapore|SG|🇭🇰|香港|Hong Kong|HK|🇹🇼|台湾|Taiwan|TW)).*
+      icon: 🌍
 
-  - name: tiktok_external
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml"
-    update_interval: 86400
+  # ── 聚合层 ─────────────────────────────────
+  - select:
+      name: 亚洲
+      policies:
+        - 日本
+        - 新加坡
+        - 香港
+        - 台湾
+      icon: 🌏
 
-  - name: youtube
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml"
-    update_interval: 86400
+  - select:
+      name: 所有地区
+      policies:
+        - 亚洲
+        - 美国
+        - 其他国家
+      icon: 😊
 
-  - name: gemini
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gemini/Gemini.yaml"
-    update_interval: 86400
+  # ── 基础层 ─────────────────────────────────
+  - select:
+      name: 直连
+      policies:
+        - DIRECT
+      hidden: true
 
-  - name: openai
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml"
-    update_interval: 86400
+  - external:
+      name: 所有订阅
+      type: select
+      urls:
+        - 你的订阅地址
+      icon: 🤣
 
-  - name: claude
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml"
-    update_interval: 86400
+  - select:
+      name: 所有代理
+      policies:
+        - 所有订阅
+      flatten: true
+      icon: 🌹
 
-  - name: bing
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml"
-    update_interval: 86400
-
-  - name: copilot
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml"
-    update_interval: 86400
-
-  - name: cloudflare_cn
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare-cn.yaml"
-    update_interval: 86400
-
-  - name: cloudflare
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare.yaml"
-    update_interval: 86400
-
-  - name: twitter
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml"
-    update_interval: 86400
-
-  - name: steam
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml"
-    update_interval: 86400
-
-  - name: spotify
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml"
-    update_interval: 86400
-
-  - name: OneDrive
-    type: http
-    format: text
-    url: "https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/OneDrive.list"
-    update_interval: 86400
-
-  - name: telegram_domain
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.yaml"
-    update_interval: 86400
-
-  - name: google_domain
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.yaml"
-    update_interval: 86400
-
-  - name: geolocation_not_cn
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml"
-    update_interval: 86400
-
-  - name: cn_domain
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml"
-    update_interval: 86400
-
-  - name: NetEaseMusic
-    type: http
-    format: text
-    url: "https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Ruleset/NetEaseMusic.list"
-    update_interval: 86400
-
-  - name: Download
-    type: http
-    format: text
-    url: "https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Download.list"
-    update_interval: 86400
-
-  - name: telegram_ip
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.yaml"
-    update_interval: 86400
-
-  - name: google_ip
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.yaml"
-    update_interval: 86400
-
-  - name: cn_ip
-    type: http
-    format: yaml
-    url: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.yaml"
-    update_interval: 86400
-
-# ---- 规则 ----
 rules:
-  - rule_set:
-      match: lan
-      policy: DIRECT
-
-  - rule_set:
-      match: private
-      policy: DIRECT
-
-  - rule_set:
-      match: unBanAD
-      policy: DIRECT
-
-  - rule_set:
-      match: ban_ad
+  - domain_regex:
+      match: ^ad\..*|^ads\..*
       policy: REJECT
-
   - rule_set:
-      match: ban_program_ad
+      match: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
       policy: REJECT
-
   - rule_set:
-      match: tiktok
-      policy: TikTok
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list
+      policy: 谷歌
   - rule_set:
-      match: tiktok_external
-      policy: TikTok
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list
+      policy: 电报
   - rule_set:
-      match: youtube
-      policy: Youtube
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list
+      policy: 推特
   - rule_set:
-      match: gemini
-      policy: Gemini
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list
+      policy: 油管
   - rule_set:
-      match: openai
-      policy: OpenAI
-
-  - rule_set:
-      match: claude
-      policy: AI
-
-  - rule_set:
-      match: bing
-      policy: Bing
-
-  - rule_set:
-      match: copilot
-      policy: AI
-
-  - rule_set:
-      match: cloudflare_cn
-      policy: DIRECT
-
-  - rule_set:
-      match: cloudflare
-      policy: OpenAI
-
-  - rule_set:
-      match: twitter
-      policy: Twitter
-
-  - rule_set:
-      match: steam
-      policy: PROXY
-
-  - rule_set:
-      match: spotify
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list
       policy: Spotify
-
   - rule_set:
-      match: OneDrive
-      policy: PROXY
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list
+      policy: ChatGPT
   - rule_set:
-      match: telegram_domain
-      policy: Telegram
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Claude/Claude.list
+      policy: Claude
   - rule_set:
-      match: google_domain
-      policy: Google
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Gemini/Gemini.list
+      policy: Gemini
   - rule_set:
-      match: geolocation_not_cn
-      policy: PROXY
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple.list
+      policy: 苹果
   - rule_set:
-      match: cn_domain
-      policy: DIRECT
-
-  - rule_set:
-      match: NetEaseMusic
-      policy: DIRECT
-
-  - rule_set:
-      match: Download
-      policy: DIRECT
-
-  - rule_set:
-      match: telegram_ip
-      policy: Telegram
-
-  - rule_set:
-      match: google_ip
-      policy: Google
-
-  - rule_set:
-      match: cn_ip
-      policy: DIRECT
-
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_Domain.list
+      policy: 苹果
+  - domain:
+      match: ifconfig.me
+      policy: 直连
+  - domain_suffix:
+      match: cn
+      policy: 直连
   - geoip:
       match: CN
-      policy: DIRECT
-
+      policy: 直连
+  - ip_cidr:
+      match: 192.168.0.0/16
+      policy: 直连
+  - ip_cidr:
+      match: 10.0.0.0/8
+      policy: 直连
+  - ip_cidr:
+      match: 127.0.0.0/8
+      policy: 直连
+  - ip_cidr:
+      match: 172.16.0.0/12
+      policy: 直连
+  - ip_cidr:
+      match: 192.128.0.0/16
+      policy: 直连
+  - ip_cidr:
+      match: 224.0.0.0/24
+      policy: 直连
   - default:
-      policy: PROXY
+      policy: 所有代理
