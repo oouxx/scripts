@@ -1,0 +1,213 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+
+dns:
+  enable: true
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  fallback:
+    - 8.8.8.8
+    - 1.1.1.1
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.local"
+    - localhost
+
+proxy-providers:
+  所有订阅:
+    type: http
+    url: "你的订阅地址"
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+
+proxy-groups:
+  # ── 业务分流组 ──────────────────────────────
+  - name: 推特
+    type: select
+    proxies:
+      - 所有地区
+
+  - name: Spotify
+    type: select
+    proxies:
+      - 所有地区
+
+  - name: Apple
+    type: select
+    proxies:
+      - 直连
+      - 所有地区
+
+  - name: Google
+    type: select
+    proxies:
+      - 所有地区
+
+  - name: Youtube
+    type: select
+    proxies:
+      - 所有地区
+
+  - name: AI
+    type: select
+    proxies:
+      - 所有地区
+
+  - name: Telegram
+    type: select
+    proxies:
+      - 所有地区
+
+  # ── 地区节点组 ──────────────────────────────
+  - name: 美国
+    type: smart
+    use:
+      - 所有订阅
+    filter: "(?i)(🇺🇸|美|States|US)"
+
+  - name: 日本
+    type: smart
+    use:
+      - 所有订阅
+    filter: "(?i)(🇯🇵|日本|Japan|JP)"
+
+  - name: 新加坡
+    type: smart
+    use:
+      - 所有订阅
+    filter: "(?i)(🇸🇬|新加坡|Singapore|SG)"
+
+  - name: 香港
+    type: smart
+    use:
+      - 所有订阅
+    filter: "(?i)(🇭🇰|香港|Hong Kong|HK)"
+
+  - name: 台湾
+    type: smart
+    use:
+      - 所有订阅
+    filter: "(?i)(🇹🇼|台湾|Taiwan|TW)"
+
+  - name: 其他国家
+    type: smart
+    use:
+      - 所有订阅
+    filter: "(?i)^(?!.*(🇺🇸|美|States|US|🇯🇵|日本|Japan|JP|🇸🇬|新加坡|Singapore|SG|🇭🇰|香港|Hong Kong|HK|🇹🇼|台湾|Taiwan|TW)).*$"
+
+  # ── 聚合层 ──────────────────────────────────
+  - name: 亚洲
+    type: select
+    proxies:
+      - 日本
+      - 新加坡
+      - 香港
+      - 台湾
+
+  - name: 所有地区
+    type: select
+    proxies:
+      - 亚洲
+      - 美国
+      - 其他国家
+
+  # ── 基础层 ──────────────────────────────────
+  - name: 直连
+    type: select
+    proxies:
+      - DIRECT
+
+rule-providers:
+  apple_cdn:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/apple_cdn.conf"
+    interval: 86400
+  apple_services:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/apple_services.conf"
+    interval: 86400
+  google:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/google.conf"
+    interval: 86400
+  youtube:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/youtube.conf"
+    interval: 86400
+  ai:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/ai.conf"
+    interval: 86400
+  telegram_domain:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/telegram.conf"
+    interval: 86400
+  telegram_ip:
+    type: http
+    behavior: ipcidr
+    url: "https://ruleset.skk.moe/List/ip/telegram.conf"
+    interval: 86400
+  twitter:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/twitter.conf"
+    interval: 86400
+  spotify:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/spotify.conf"
+    interval: 86400
+  domestic_domain:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/domestic.conf"
+    interval: 86400
+  direct:
+    type: http
+    behavior: domain
+    url: "https://ruleset.skk.moe/List/non_ip/direct.conf"
+    interval: 86400
+  domestic_ip:
+    type: http
+    behavior: ipcidr
+    url: "https://ruleset.skk.moe/List/ip/domestic.conf"
+    interval: 86400
+
+rules:
+  # Apple
+  - RULE-SET,apple_cdn,Apple
+  - RULE-SET,apple_services,Apple
+  # Google
+  - RULE-SET,google,Google
+  # Youtube
+  - RULE-SET,youtube,Youtube
+  # AI
+  - RULE-SET,ai,AI
+  # Telegram
+  - RULE-SET,telegram_domain,Telegram
+  - RULE-SET,telegram_ip,Telegram
+  # Twitter
+  - RULE-SET,twitter,推特
+  # Spotify
+  - RULE-SET,spotify,Spotify
+  # 国内直连
+  - RULE-SET,domestic_domain,直连
+  - RULE-SET,direct,直连
+  - RULE-SET,domestic_ip,直连
+  - GEOIP,CN,直连
+  # 兜底
+  - MATCH,所有地区
